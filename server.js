@@ -1,12 +1,18 @@
+// ========== Import Dependencies ========= //
+
 import express from "express";
 import fs from "node:fs/promises";
+
+// ========== Express App Setup ========= //
 
 const app = express();
 const port = 3000;
 
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.set("view engine", "ejs"); // Set EJS as the view engine
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
+app.use(express.static("public")); // Serve static files from the "public" directory
+
+// ========== Data Management ========= //
 
 async function loadStudents() {
   const data = await fs.readFile("./data/students.json", "utf8");
@@ -17,6 +23,8 @@ async function saveStudents(students) {
   const json = JSON.stringify(students, null, 2);
   await fs.writeFile("./data/students.json", json);
 }
+
+// ========== Routes ========= //
 
 app.get("/", async (request, response) => {
   const students = await loadStudents();
@@ -43,9 +51,7 @@ app.post("/students", async (request, response) => {
 app.post("/students/:id/delete", async (request, response) => {
   const students = await loadStudents();
 
-  const remainingStudents = students.filter(
-    (student) => student.id !== Number(request.params.id)
-  );
+  const remainingStudents = students.filter((student) => student.id !== Number(request.params.id));
 
   await saveStudents(remainingStudents);
 
@@ -55,9 +61,7 @@ app.post("/students/:id/delete", async (request, response) => {
 app.get("/students/:id/edit", async (request, response) => {
   const students = await loadStudents();
 
-  const student = students.find(
-    (student) => student.id === Number(request.params.id)
-  );
+  const student = students.find((student) => student.id === Number(request.params.id));
 
   response.render("edit", { student });
 });
@@ -65,9 +69,7 @@ app.get("/students/:id/edit", async (request, response) => {
 app.post("/students/:id/edit", async (request, response) => {
   const students = await loadStudents();
 
-  const student = students.find(
-    (student) => student.id === Number(request.params.id)
-  );
+  const student = students.find((student) => student.id === Number(request.params.id));
 
   student.name = request.body.name;
   student.education = request.body.education;
@@ -76,6 +78,8 @@ app.post("/students/:id/edit", async (request, response) => {
 
   response.redirect("/");
 });
+
+// ========== Start the Server ========= //
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

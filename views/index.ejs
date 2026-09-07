@@ -7,55 +7,69 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Studerende</h1>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Main navigation">
+        <span class="nav-link">Studerende</span>
+      </nav>
+    </header>
+
+    <main class="app">
+      <h1 class="page-title">Studerende</h1>
 
       <section>
         <% if (students.length === 0) { %>
           <p class="empty">Der er endnu ingen studerende.</p>
         <% } else { %>
-          <table>
-            <thead>
-              <tr>
-                <th>Navn</th>
-                <th>Uddannelse</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% for (const student of students) { %>
+          <div class="panel">
+            <table>
+              <thead>
                 <tr>
-                  <td><%= student.name %></td>
-                  <td><%= student.education %></td>
-                  <td>
-                    <div class="actions">
-                      <a class="btn" href="/students/<%= student.id %>/edit">Redigér</a>
-                      <form method="POST" action="/students/<%= student.id %>/delete">
-                        <button type="submit" class="btn btn-danger">Slet</button>
-                      </form>
-                    </div>
-                  </td>
+                  <th>Navn</th>
+                  <th>Uddannelse</th>
+                  <th></th>
                 </tr>
-              <% } %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <% for (const student of students) { %>
+                  <tr>
+                    <td><%= student.name %></td>
+                    <td><%= student.education %></td>
+                    <td>
+                      <div class="actions">
+                        <a class="btn" href="/students/<%= student.id %>/edit">Redigér</a>
+                        <form method="POST" action="/students/<%= student.id %>/delete">
+                          <button type="submit" class="btn btn-danger">Slet</button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
         <% } %>
       </section>
 
       <section>
         <h2>Opret ny studerende</h2>
-        <form method="POST" action="/students">
-          <label>Navn
-            <input name="name" type="text" />
-          </label>
+        <form class="post-form" method="POST" action="/students">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="name">Navn</label>
+              <input id="name" name="name" type="text" placeholder="Fx. Anna Jensen" />
+            </div>
 
-          <label>Uddannelse
-            <input name="education" type="text" />
-          </label>
+            <div class="form-field">
+              <label for="education">Uddannelse</label>
+              <input id="education" name="education" type="text" placeholder="Fx. Datamatiker" />
+            </div>
+          </div>
 
-          <button type="submit" class="btn btn-primary btn-submit">Opret studerende</button>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Opret studerende</button>
+          </div>
         </form>
       </section>
-    </div>
+    </main>
   </body>
 </html>
