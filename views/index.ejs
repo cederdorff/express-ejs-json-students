@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studerende</title>
+  </head>
+  <body>
+    <h1>Studerende</h1>
+
+    <ul>
+      <% for (const student of students) { %>
+        <li>
+          <%= student.name %> — <%= student.education %>
+          <a href="/students/<%= student.id %>/edit">Redigér</a>
+          <form method="POST" action="/students/<%= student.id %>/delete">
+            <button type="submit">Slet</button>
+          </form>
+        </li>
+      <% } %>
+    </ul>
+
+    <form method="POST" action="/students">
+      <label for="name">Navn</label>
+      <input id="name" name="name" type="text" />
+
+      <label for="education">Uddannelse</label>
+      <input id="education" name="education" type="text" />
+
+      <button type="submit">Opret studerende</button>
+    </form>
+  </body>
+</html>

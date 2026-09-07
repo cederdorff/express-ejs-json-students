@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redigér studerende</title>
+  </head>
+  <body>
+    <h1>Redigér <%= student.name %></h1>
+
+    <form method="POST" action="/students/<%= student.id %>/edit">
+      <label for="name">Navn</label>
+      <input id="name" name="name" type="text" value="<%= student.name %>" />
+
+      <label for="education">Uddannelse</label>
+      <input id="education" name="education" type="text" value="<%= student.education %>" />
+
+      <button type="submit">Gem ændring</button>
+    </form>
+
+    <a href="/">Tilbage</a>
+  </body>
+</html>
