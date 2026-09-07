@@ -4,20 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redigér studerende</title>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <h1>Redigér <%= student.name %></h1>
+    <div class="container">
+      <h1>Redigér <%= student.name %></h1>
 
-    <form method="POST" action="/students/<%= student.id %>/edit">
-      <label for="name">Navn</label>
-      <input id="name" name="name" type="text" value="<%= student.name %>" />
+      <section>
+        <form method="POST" action="/students/<%= student.id %>/edit">
+          <label>Navn
+            <input name="name" type="text" value="<%= student.name %>" />
+          </label>
 
-      <label for="education">Uddannelse</label>
-      <input id="education" name="education" type="text" value="<%= student.education %>" />
+          <label>Uddannelse
+            <input name="education" type="text" value="<%= student.education %>" />
+          </label>
 
-      <button type="submit">Gem ændring</button>
-    </form>
+          <button type="submit" class="btn btn-primary btn-submit">Gem ændring</button>
+        </form>
+      </section>
 
-    <a href="/">Tilbage</a>
+      <a class="btn back-link" href="/">Tilbage</a>
+    </div>
   </body>
 </html>
