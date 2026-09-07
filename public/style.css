@@ -4,32 +4,25 @@
   --light-green: rgb(172, 198, 201);
   --text-color-danger: #f44250;
   --text-color-dark: #333;
-  --text-color-light: #f1f1f1;
   --white: #f1f1f1;
   --shadow-soft: 0 0 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2);
+  --shadow-hover: 0 0 1px hsla(0, 0%, 0%, 0.6), 0 1px 2px hsla(0, 0%, 0%, 0.2);
   --shadow-card: 1px 1px 8px rgba(0, 0, 0, 0.25);
-}
-
-html {
-  box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
-body,
-html {
+body {
   background-color: var(--light-green);
   color: var(--text-color-dark);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  min-height: 100%;
+  min-height: 100vh;
   line-height: 1.5;
   margin: 0;
-  padding: 0;
 }
 
 a {
@@ -54,7 +47,7 @@ a:hover {
 
 .nav-link {
   display: inline-block;
-  color: var(--text-color-light);
+  color: var(--white);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 500;
@@ -130,9 +123,13 @@ tr:hover td {
   background-color: rgba(172, 198, 201, 0.25);
 }
 
-.actions {
+.actions,
+.form-actions {
   display: flex;
   gap: 0.5em;
+}
+
+.actions {
   justify-content: flex-end;
 }
 
@@ -180,9 +177,7 @@ tr:hover td {
 }
 
 .form-field input:hover {
-  box-shadow:
-    0 0 1px hsla(0, 0%, 0%, 0.6),
-    0 1px 2px hsla(0, 0%, 0%, 0.2);
+  box-shadow: var(--shadow-hover);
 }
 
 .form-field input:focus {
@@ -195,8 +190,6 @@ tr:hover td {
 }
 
 .form-actions {
-  display: flex;
-  gap: 0.5em;
   padding-top: 0.25em;
 }
 
@@ -244,9 +237,7 @@ tr:hover td {
 }
 
 .btn:hover {
-  box-shadow:
-    0 0 1px hsla(0, 0%, 0%, 0.6),
-    0 1px 2px hsla(0, 0%, 0%, 0.2);
+  box-shadow: var(--shadow-hover);
 }
 
 .btn:active {
